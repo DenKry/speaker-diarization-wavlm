@@ -1,0 +1,7 @@
+system,dataset,der_strict,der_collar,note,source
+EEND-M2F,AMI-Mix (headset mix) test,13.86,9.16,"trained on a compound set that includes AMI; no collar / 0.25 s collar; Härkönen et al. 2024, Table 1",https://arxiv.org/abs/2401.12600
+EEND-M2F + FT,AMI-Mix (headset mix) test,12.62,7.92,"additionally fine-tuned on AMI",https://arxiv.org/abs/2401.12600
+pyannote precision-2,AMI (IHM) test,12.9,,"commercial pyannoteAI model; benchmark on the model card, no collar",https://huggingface.co/pyannote/speaker-diarization-community-1
+pyannote community-1,AMI (IHM) test,17.0,,"open pipeline; same benchmark table",https://huggingface.co/pyannote/speaker-diarization-community-1
+pyannote 3.1 (legacy),AMI (IHM) test,18.8,,"open pipeline; our B1 rebuilds it and gets 17.71",https://huggingface.co/pyannote/speaker-diarization-community-1
+NVIDIA Streaming Sortformer v2.1,AMI (IHM) test,16.67,,"from the model card metadata; not verified against the paper",https://huggingface.co/nvidia/diar_streaming_sortformer_4spk-v2.1

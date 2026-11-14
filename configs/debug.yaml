@@ -1,0 +1,30 @@
+# Quick local check of the whole training code on a few meetings (small from-scratch model).
+name: debug
+seed: 42
+out_dir: runs/debug
+
+data:
+  dir: data/ami
+  fraction: 1.0
+  chunk_sec: 10.0
+  augment: true           # random volume and noise on training chunks
+  num_workers: 4
+
+model:
+  type: logmel
+  channels: 256
+  head: bilstm
+  hidden: 256
+  layers: 2
+  dropout: 0.1
+
+train:
+  batch_size: 16
+  epochs: 4
+  steps_per_epoch: 150
+  lr: 0.001
+  weight_decay: 0.01
+  warmup: 0.1
+  grad_clip: 5.0
+  amp: true
+  val_max_chunks: 200

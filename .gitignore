@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+data/
+runs/
+*.log
+.venv-diarizen/
+external/
+
+# not part of the public repository
+report/
+latex report/
+PROJECT_PLAN.md
+PROJECT_GUIDE.md
+PROJECT_GUIDE_RU.md
+.vscode/
+hf_export/

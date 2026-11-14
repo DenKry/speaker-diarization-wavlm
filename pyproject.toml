@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diar"
+version = "0.1.0"
+description = "Speaker diarization with WavLM"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "torchaudio",
+    "transformers",
+    "datasets",
+    "huggingface_hub",
+    "pyannote.audio",
+    "pyannote.metrics",
+    "soundfile",
+    "numpy",
+    "pyyaml",
+    "tensorboard",
+    "matplotlib",
+    "gradio",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,6 @@
+experiment,split,der_strict,missed_strict,false_alarm_strict,confusion_strict,der_collar,missed_collar,false_alarm_collar,confusion_collar,jer
+B1,test,17.71,9.52,3.58,4.61,11.46,6.78,1.76,2.92,23.8
+B2,test,25.69,22.68,1.14,1.87,22.16,20.85,0.44,0.87,28.3
+E1,test,19.68,10.3,3.85,5.54,12.57,7.29,1.93,3.35,26.12
+E2,test,15.38,7.99,3.18,4.21,9.6,5.91,1.4,2.29,22.14
+E3,test,14.14,8.3,2.59,3.25,9.09,6.24,1.16,1.69,20.43

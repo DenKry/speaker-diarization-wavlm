@@ -1,0 +1,32 @@
+# E2: frozen WavLM, only the layer weights and the head are trained.
+# Sized for a 6 GB GPU.
+name: e2_frozen
+seed: 42
+out_dir: runs/e2_frozen
+
+data:
+  dir: data/ami
+  fraction: 1.0           # part of the train meetings to use
+  chunk_sec: 10.0
+  augment: true           # random volume and noise on training chunks
+  num_workers: 4
+
+model:
+  type: wavlm
+  name: microsoft/wavlm-base-plus
+  freeze: true
+  head: bilstm            # bilstm | linear
+  hidden: 256
+  layers: 2
+  dropout: 0.1
+
+train:
+  batch_size: 16
+  epochs: 10
+  steps_per_epoch: 2000   # 16 x 2000 chunks = about one pass over AMI train
+  lr: 0.001
+  weight_decay: 0.01
+  warmup: 0.1             # part of all steps
+  grad_clip: 5.0
+  amp: true
+  val_max_chunks: 1500

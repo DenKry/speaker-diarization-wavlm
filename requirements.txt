@@ -1,0 +1,13 @@
+torch
+torchaudio
+transformers
+datasets
+huggingface_hub
+pyannote.audio
+pyannote.metrics
+soundfile
+numpy
+pyyaml
+tensorboard
+matplotlib
+gradio
