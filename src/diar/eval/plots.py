@@ -1,4 +1,4 @@
-"""Figures for the README and the demo: a clean, minimal look (white background, light grid)."""
+"""Figures: a clean, minimal look (white background, light grid)."""
 
 import csv
 

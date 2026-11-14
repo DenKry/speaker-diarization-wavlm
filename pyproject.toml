@@ -20,7 +20,6 @@ dependencies = [
     "pyyaml",
     "tensorboard",
     "matplotlib",
-    "gradio",
 ]
 
 [tool.setuptools.packages.find]

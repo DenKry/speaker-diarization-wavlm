@@ -98,9 +98,6 @@ python scripts/evaluate.py --checkpoint runs/e3_finetune/best.pt --name E3
 # 4. Figures -> results/figures
 python scripts/make_plots.py --layers E2=runs/e2_frozen/best.pt E3=runs/e3_finetune/best.pt \
     --training E1=runs/e1_scratch E2=runs/e2_frozen E3=runs/e3_finetune --example test_010 540 600
-
-# 5. Demo in the browser: upload or record audio
-python demo/app.py --checkpoint runs/e3_finetune/best.pt --baseline
 ```
 
 Training curves: `tensorboard --logdir runs`. The settings of every experiment are in
@@ -142,7 +139,6 @@ src/diar/train/        loss and training loop
 src/diar/inference/    adapter + full diarization pipeline
 src/diar/eval/         DER / JER and figures
 scripts/               command-line entry points
-demo/                  Gradio demo
 results/               result tables, figures and the system outputs (RTTM)
 ```
 

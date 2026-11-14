@@ -21,3 +21,6 @@ hf_export/
 # source of the files published on the Hugging Face Hub (kept locally only)
 hf/
 scripts/export_hf.py
+
+# local demo, not part of the repository
+demo/
