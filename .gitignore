@@ -17,3 +17,7 @@ PROJECT_GUIDE.md
 PROJECT_GUIDE_RU.md
 .vscode/
 hf_export/
+
+# source of the files published on the Hugging Face Hub (kept locally only)
+hf/
+scripts/export_hf.py

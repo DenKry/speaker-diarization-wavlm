@@ -13,9 +13,13 @@ against 17.7 % for the pyannote 3.1 pipeline evaluated in the same way.
 | | System | DER on AMI test |
 |---|---|---|
 | B1 | pyannote 3.1 (ready-made) | 17.7 % |
+| B2 | DiariZen (ready-made) | 25.7 % * |
 | E1 | small model trained from scratch | 19.7 % |
 | E2 | frozen WavLM + BiLSTM head | 15.4 % |
 | E3 | fine-tuned WavLM + BiLSTM head | **14.1 %** |
+
+\* DiariZen misses a lot of speech on this version of AMI, far from its usual quality; on
+VoxConverse it is the best of the five systems (8.0 %). See the results page.
 
 The models are trained on AMI only, so they are specialised on meetings: on other kinds of
 recordings the general-purpose systems are better. All numbers, the cross-corpus test and the
@@ -40,9 +44,6 @@ for turn, _, speaker in model.diarize("meeting.wav").itertracks(yield_label=True
     print(f"{turn.start:7.1f}s - {turn.end:7.1f}s  {speaker}")
 ```
 
-The model code that is published with the weights is in [`hf/`](hf), and
-`scripts/export_hf.py` builds the Hub folder from a training checkpoint.
-
 ## How it works
 
 ```
@@ -66,8 +67,9 @@ The three models share the same BiLSTM head and differ only in their features:
 | E2 | frozen WavLM Base+, learned weighted sum of its layers | 3.7 M |
 | E3 | the same, with WavLM fine-tuned (starts from E2) | 93.9 M |
 
-The baseline B1 uses the same pipeline with pyannote's own segmentation model, so the four
-systems differ only in the segmentation model.
+The baseline B1 uses the same pipeline with pyannote's own segmentation model, so B1 and
+E1-E3 differ only in the segmentation model. B2 (DiariZen) is a separate, larger system with
+its own pipeline.
 
 ## Setup
 
@@ -95,7 +97,7 @@ python scripts/evaluate.py --checkpoint runs/e3_finetune/best.pt --name E3
 
 # 4. Figures -> results/figures
 python scripts/make_plots.py --layers E2=runs/e2_frozen/best.pt E3=runs/e3_finetune/best.pt \
-    --training E1=runs/e1_scratch E2=runs/e2_frozen E3=runs/e3_finetune
+    --training E1=runs/e1_scratch E2=runs/e2_frozen E3=runs/e3_finetune --example test_010 540 600
 
 # 5. Demo in the browser: upload or record audio
 python demo/app.py --checkpoint runs/e3_finetune/best.pt --baseline
@@ -141,7 +143,6 @@ src/diar/inference/    adapter + full diarization pipeline
 src/diar/eval/         DER / JER and figures
 scripts/               command-line entry points
 demo/                  Gradio demo
-hf/                    model code and model card published on the Hugging Face Hub
 results/               result tables, figures and the system outputs (RTTM)
 ```
 
