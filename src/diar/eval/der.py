@@ -63,18 +63,25 @@ def save_row(metrics: dict, name: str, split: str, results_csv: str) -> dict:
     return row
 
 
-def evaluate(pipeline, split_dir: str, out_dir: str, name: str, results_csv: str = "results/results.csv") -> dict:
-    """Diarize every meeting, save the RTTMs and add the scores to the results table."""
+def evaluate(pipeline, split_dir: str, out_dir: str, name: str, results_csv: str = "results/results.csv",
+             resume: bool = False) -> dict:
+    """Diarize every meeting, save the RTTMs and add the scores to the results table.
+
+    resume=True reuses the RTTMs that an interrupted run has already written to out_dir.
+    """
     metrics = new_metrics()
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
 
     for rttm in sorted(Path(split_dir).glob("*.rttm")):
         audio = rttm.with_suffix(".flac")
-        hypothesis = diarize(pipeline, str(audio))
-        hypothesis.uri = rttm.stem
-        with open(out / rttm.name, "w") as f:
-            hypothesis.write_rttm(f)
+        if resume and (out / rttm.name).exists():
+            hypothesis = read_annotation(out / rttm.name)
+        else:
+            hypothesis = diarize(pipeline, str(audio))
+            hypothesis.uri = rttm.stem
+            with open(out / rttm.name, "w") as f:
+                hypothesis.write_rttm(f)
         score_meeting(metrics, read_annotation(rttm), hypothesis, audio)
 
     return save_row(metrics, name, Path(split_dir).name, results_csv)
